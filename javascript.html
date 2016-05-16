@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>瞎写代码</title>
+	<style type="text/css">
+		#did{
+			width:400px;
+			height:400px;
+			border:2px solid #ddd;
+			position:absolute;
+			overflow:hidden;
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<h2>放大镜的效果</h2>
+	<img id="pic" src="./images/123.jpg" width="192"/>
+	<div id="did" >
+		<img src="./images/123.jpg"/>
+	</div>
+	
+	<script type="text/javascript">
+		//获取被放大对象节点和div对象
+		var pic = document.getElementById("pic");
+		var did = document.getElementById("did");
+		//添加图片鼠标移入移出
+		pic.onmouseover=function(){
+			//获取距离
+			var top = this.offsetTop;
+			var left =this.offsetLeft + this.offsetWidth + 10;
+			//定位DIV的位置
+			did.style.top=top + "px";
+			did.style.left=left + "px";
+			did.style.display="block";
+		}
+		pic.onmouseout=function(){
+			did.style.display="none";
+		}
+		//获取鼠标位置
+		pic.onmousemove=function(ent){
+			var event= ent || window.event;
+			did.scrollLeft=(event.clientX-this.offsetLeft)*10;
+			did.scrollTop=(event.clientY-this.offsetTop)*10;
+		}
+		
+	</script>
+</body>
+</html>
